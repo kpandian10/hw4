@@ -9,17 +9,36 @@
     <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
 
-  <body>
-    <div>
-      <%= flash["notice"] %>
+<body class="pt-4">
+  <div class="container">
+    <div class="row justify-content-end mb-2">
+      <div class="col">
+        <%= flash["notice"] %>
+      </div>
+      <div class="col-3 text-end">
+        <% @user = User.find_by({ "id" => session["user_id"] }) %>
+        <% if @user == nil %>
+          <a href="/users/new" class="btn btn-default">Sign Up</a>
+          |
+          <a href="/login" class="btn btn-default">Login</a>
+        <% else %>
+          Logged in as: <%= @user["username"] %>
+          |
+          <a href="/logout" class="btn btn-default">Logout</a>
+        <% end %>
+      </div>
     </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
+
+    <div class="row">
+      <div class="col">
+        <h1 class="display-6 mb-4">Tacostagram</h1>
+      </div>
+      <div class="col-2 text-end">
+        <a href="/posts/new/" class="btn btn-success">New Post</a>
+      </div>
     </div>
 
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
