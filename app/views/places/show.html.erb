@@ -11,18 +11,23 @@
   
   <div class="row">
     <% for entry in @entries %>
-      <div class="col-md-4 mb-4">
+      <div class="col-sm-6 col-md-3">
       
         <h4><%= entry["title"] %></h4>
         <p><%= entry["occurred_on"] %></p>
 
         <!-- Placeholder for Image -->
-        <div style="height: 200px; background-color: #eaeaea; display: flex; justify-content: center; align-items: center;">
-          <span>Image Placeholder</span>
+        <div class = "mb-3">
+          <% if entry.uploaded_image.attached?%>
+            <img src="<%= url_for(entry.uploaded_image)%>" class="img-fluid">
+          <%else%>
+            <img src="<%= entry["image"] %>" class="img-fluid">
+          <%end%>
         </div>
 
-        
+      
         <p class="mt-3"><%= entry["description"] %></p>
+      
       </div>
     <% end %>
   </div>
